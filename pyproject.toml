@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lbmtorch"
+version = "0"  # required by pip; not a release number
+description = "A differentiable, GPU-accelerated lattice Boltzmann solver written in PyTorch."
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">=3.10"
+authors = [{ name = "Arshia Fazeli" }]
+keywords = ["lattice boltzmann", "cfd", "pytorch", "differentiable simulation", "gpu"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = ["torch>=2.1", "numpy>=1.24"]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "pytest-cov"]
+examples = ["matplotlib"]
+dev = ["lbmtorch[test,examples]", "ruff==0.16.8", "mypy", "pre-commit"]
+
+[project.urls]
+Source = "https://github.com/arfazeli/lbmtorch"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -m 'not slow'"
+markers = ["slow: long-running benchmark; run with `pytest -m slow`"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "D"]
+ignore = ["D105", "D107"]
+pydocstyle.convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D"]
+"examples/*" = ["D"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true

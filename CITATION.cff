@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+type: software
+title: "lbmtorch: a differentiable lattice Boltzmann solver in PyTorch"
+authors:
+  - family-names: Fazeli
+    given-names: Arshia
+license: MIT
+repository-code: https://github.com/arfazeli/lbmtorch
